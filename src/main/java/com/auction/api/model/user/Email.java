@@ -25,6 +25,10 @@ public class Email {
         return matches("^[\\w\\-_]+@[\\w-]++\\.[\\w.]+$", address);
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public String getName(){
         String[] split = address.split("@");
         if(split.length == 2){
