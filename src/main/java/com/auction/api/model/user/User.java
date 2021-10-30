@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.time.LocalDateTime.now;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class User {
@@ -35,7 +37,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.createAt = createAt;
+        this.createAt = defaultIfNull(createAt, now());
     }
 
     public Long getSeq() {
