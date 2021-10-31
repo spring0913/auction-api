@@ -20,7 +20,7 @@ CREATE TABLE auctions
     seq                 bigint          NOT NULL AUTO_INCREMENT,                -- 경매 PK
     user_seq            bigint          NOT NULL,                               -- 판매자 PK
     title               varchar(300)    NOT NULL,                               -- 경매 이름
-    contents            varchar(500)    NOT NULL,                               -- 경매 내용
+    contents            varchar(500)    DEFAULT NULL,                           -- 경매 내용
     reserve_price       int             NOT NULL DEFAULT 0,                     -- 최저 경매 가격
     start_time          datetime        NOT NULL DEFAULT CURRENT_TIMESTAMP(),   -- 경매 시작일시(생성일시)
     end_time            datetime        NOT NULL,                               -- 경매 종료일시
