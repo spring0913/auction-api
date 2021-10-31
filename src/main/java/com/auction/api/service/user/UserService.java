@@ -7,6 +7,8 @@ import com.auction.api.util.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
@@ -32,5 +34,12 @@ public class UserService {
 
         User user = new User(name, email, passwordEncoder.encode(password));
         return userRepository.insert(user);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<User> findByEmail(Email email){
+        checkArgument(email != null, "email must be provided.");
+
+        return userRepository.findByEmail(email);
     }
 }
