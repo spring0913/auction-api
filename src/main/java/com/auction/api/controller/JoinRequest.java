@@ -11,7 +11,11 @@ public class JoinRequest {
 
     private String credential;
 
-    public JoinRequest(){}
+    public JoinRequest(String name, String email, String credential) {
+        this.name = name;
+        this.email = email;
+        this.credential = credential;
+    }
 
     public String getName() {
         return name;
