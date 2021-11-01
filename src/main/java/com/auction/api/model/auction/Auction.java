@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.time.LocalDateTime.now;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class Auction {
@@ -54,7 +56,7 @@ public class Auction {
         this.reservePrice = reservePrice;
         this.highestPrice = highestPrice;
         this.bidPriceOfMe = bidPriceOfMe;
-        this.startTime = startTime;
+        this.startTime = defaultIfNull(startTime, now());
         this.endTime = endTime;
     }
 
