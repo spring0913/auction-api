@@ -1,4 +1,4 @@
-package com.auction.api.util;
+package com.auction.api.security;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

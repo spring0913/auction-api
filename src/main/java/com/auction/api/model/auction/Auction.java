@@ -17,7 +17,6 @@ public class Auction {
 
     private final Long seq;
 
-    // 경매 생성 유저
     private final Id<User, Long> userId;
 
     private final String title;
@@ -31,23 +30,25 @@ public class Auction {
 
     private int bidPriceOfMe;
 
+    // 경매 생성 유저 이름
+    private final String auctioneer;
+
     private final LocalDateTime startTime;
 
     private final LocalDateTime endTime;
 
-    public Auction(Id<User, Long> userId, String title, LocalDateTime endTime){
-        this(null, userId, title, null, 0, 0, 0, null, endTime);
+    public Auction(Id<User, Long> userId, String title, String contents, int reservePrice, String auctioneer, LocalDateTime endTime){
+        this(null, userId, title, contents, reservePrice, 0, 0, auctioneer, null, endTime);
     }
 
-    public Auction(Long seq, Id<User, Long> userId, String title, String contents, int reservePrice, int highestPrice, int bidPriceOfMe, LocalDateTime startTime, LocalDateTime endTime) {
+    public Auction(Long seq, Id<User, Long> userId, String title, String contents, int reservePrice, int highestPrice, int bidPriceOfMe, String auctioneer, LocalDateTime startTime, LocalDateTime endTime) {
         checkArgument(userId != null, "userId must be provided.");
         checkArgument(isNotEmpty(title), "title must be provided.");
         checkArgument(title.length() >= 3 && title.length() <= 300,
                 "auction title length must be between 3 and 300 characters.");
         checkArgument(reservePrice >= 0, "reserve price must be greater or equal to 0.");
-        checkArgument(highestPrice >= reservePrice, "highest price must be greater than reserve price.");
-        checkArgument(bidPriceOfMe >= reservePrice, "bid price must be greater than reserve price.");
-        checkArgument(endTime.isAfter(startTime), "end time must be later than start time.");
+        checkArgument(isNotEmpty(auctioneer), "auctioneerName must be provided.");
+        checkArgument(endTime.isAfter(now()), "end time must be later than start time.");
 
         this.seq = seq;
         this.userId = userId;
@@ -56,6 +57,7 @@ public class Auction {
         this.reservePrice = reservePrice;
         this.highestPrice = highestPrice;
         this.bidPriceOfMe = bidPriceOfMe;
+        this.auctioneer = auctioneer;
         this.startTime = defaultIfNull(startTime, now());
         this.endTime = endTime;
     }
@@ -95,6 +97,10 @@ public class Auction {
         return bidPriceOfMe;
     }
 
+    public String getAuctioneer() {
+        return auctioneer;
+    }
+
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -126,6 +132,7 @@ public class Auction {
             .append("reservePrice", reservePrice)
             .append("highestPrice", highestPrice)
             .append("bidPriceOfMe", bidPriceOfMe)
+            .append("auctioneer", auctioneer)
             .append("startTime", startTime)
             .append("endTime", endTime)
             .toString();
@@ -139,6 +146,7 @@ public class Auction {
         private int reservePrice;
         private int highestPrice;
         private int bidPriceOfMe;
+        private String auctioneer;
         private LocalDateTime startTime;
         private LocalDateTime endTime;
 
@@ -153,6 +161,7 @@ public class Auction {
             this.reservePrice = auction.reservePrice;
             this.highestPrice = auction.highestPrice;
             this.bidPriceOfMe = auction.bidPriceOfMe;
+            this.auctioneer = auction.auctioneer;
             this.startTime = auction.startTime;
             this.endTime = auction.endTime;
         }
@@ -192,6 +201,11 @@ public class Auction {
             return this;
         }
 
+        public Builder auctioneer(String auctioneer){
+            this.auctioneer = auctioneer;
+            return this;
+        }
+
         public Builder startTime(LocalDateTime startTime){
             this.startTime = startTime;
             return this;
@@ -203,7 +217,7 @@ public class Auction {
         }
 
         public Auction build(){
-            return new Auction(seq, userId, title, contents, reservePrice, highestPrice, bidPriceOfMe, startTime, endTime);
+            return new Auction(seq, userId, title, contents, reservePrice, highestPrice, bidPriceOfMe, auctioneer, startTime, endTime);
         }
     }
 }

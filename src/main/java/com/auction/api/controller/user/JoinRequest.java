@@ -1,4 +1,4 @@
-package com.auction.api.controller;
+package com.auction.api.controller.user;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

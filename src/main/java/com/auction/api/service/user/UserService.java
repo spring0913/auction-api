@@ -3,7 +3,7 @@ package com.auction.api.service.user;
 import com.auction.api.model.user.Email;
 import com.auction.api.model.user.User;
 import com.auction.api.repository.user.UserRepository;
-import com.auction.api.util.PasswordEncoder;
+import com.auction.api.security.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

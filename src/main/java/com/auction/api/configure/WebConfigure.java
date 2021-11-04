@@ -1,6 +1,6 @@
 package com.auction.api.configure;
 
-import com.auction.api.util.PasswordEncoder;
+import com.auction.api.security.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

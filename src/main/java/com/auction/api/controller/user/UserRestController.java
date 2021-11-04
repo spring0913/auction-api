@@ -1,4 +1,4 @@
-package com.auction.api.controller;
+package com.auction.api.controller.user;
 
 import com.auction.api.ApiResult;
 import com.auction.api.model.user.Email;

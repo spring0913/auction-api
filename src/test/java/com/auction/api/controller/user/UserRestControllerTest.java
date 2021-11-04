@@ -1,6 +1,5 @@
 package com.auction.api.controller.user;
 
-import com.auction.api.controller.JoinRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
